@@ -1,20 +1,29 @@
 import React, {Component} from 'react';
 // @ts-ignore
-import {Linking, PermissionsAndroid, Platform, StyleSheet, Text, ImageBackground, View, TextInput} from 'react-native';
+import {StyleSheet, Text, TextInput, View} from 'react-native';
 
-type Props = {};
+type Props = { title: String, onChange: (value: String) => void };
 export default class InputTitle extends Component<Props, any> {
 
+    constructor(props: Props, context: any) {
+        super(props, context);
+        this.state = {
+            value: ''
+        }
+    }
 
     render() {
         return (
-            <View>
-                <View style={styles.wrapper}>
-                    <Text style={styles.title}>LOGIN</Text>
-                    <TextInput style={styles.input}></TextInput>
-                </View>
+
+            <View style={styles.wrapper}>
+                <Text style={styles.title}>{(this.props.title)}</Text>
+                <TextInput onChangeText={this.onChange} style={styles.input}></TextInput>
             </View>
         )
+    }
+
+    onChange = (value: String) => {
+        this.props.onChange(value)
     }
 }
 
@@ -22,8 +31,6 @@ const styles = StyleSheet.create({
     wrapper: {
         flex: 1,
         flexDirection: 'column',
-        paddingLeft:30,
-        paddingRight:30,
     },
     title: {
         fontSize: 12,

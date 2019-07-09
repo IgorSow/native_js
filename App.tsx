@@ -9,7 +9,7 @@
 import Service from "./src/services/Service.js";
 import React, {Component} from 'react';
 // @ts-ignore
-import {Linking, PermissionsAndroid, Platform, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Linking, PermissionsAndroid, Platform, StyleSheet, View} from 'react-native';
 // @ts-ignore
 import {CameraKitCameraScreen} from 'react-native-camera-kit';
 import LoginP from "./src/pages/Login-page";
@@ -23,7 +23,7 @@ const instructions = Platform.select({
 });
 
 type Props = {};
-export default class App extends Component<Props,any> {
+export default class App extends Component<Props, any> {
     constructor(props: Props) {
 
         super(props);
@@ -39,12 +39,11 @@ export default class App extends Component<Props,any> {
 
     render() {
         return (
-            <View>
+            <View style={{flex: 1}}>
                 <LoginP/>
             </View>
         );
     }
-
 
 
     openLink_in_browser = () => {
@@ -66,7 +65,7 @@ export default class App extends Component<Props,any> {
 
         if (Platform.OS === 'android') {
             // noinspection JSAnnotator
-              let requestCameraPermission = async ()=> {
+            let requestCameraPermission = async () => {
                 try {
 
                     const granted = await PermissionsAndroid.request(
