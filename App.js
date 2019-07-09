@@ -6,9 +6,11 @@
  * @flow
  */
 
+import Service from './service/Service.js'
 import React, {Component} from 'react';
-import {StyleSheet, View, Text, Platform, TouchableOpacity, Linking, PermissionsAndroid} from 'react-native';
-import { CameraKitCameraScreen, } from 'react-native-camera-kit';
+import {Linking, PermissionsAndroid, Platform, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {CameraKitCameraScreen,CameraKitGalleryView} from 'react-native-camera-kit';
+
 const instructions = Platform.select({
     ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
     android:
@@ -42,16 +44,6 @@ export default class App extends Component<Props> {
     // }
 
 
-
-
-
-
-
-
-
-
-
-
     openLink_in_browser = () => {
 
         Linking.openURL(this.state.QR_Code_Value);
@@ -60,12 +52,15 @@ export default class App extends Component<Props> {
 
     onQR_Code_Scan_Done = (QR_Code) => {
 
-        this.setState({ QR_Code_Value: QR_Code });
+        this.setState({QR_Code_Value: QR_Code});
 
-        this.setState({ Start_Scanner: false });
+        this.setState({Start_Scanner: false});
     };
 
-    open_QR_Code_Scanner=()=> {
+    open_QR_Code_Scanner = () => {
+        Service.ok();
+        Service.ok();
+
 
         var that = this;
 
@@ -81,8 +76,8 @@ export default class App extends Component<Props> {
                     );
                     if (granted === PermissionsAndroid.RESULTS.GRANTED) {
 
-                        that.setState({ QR_Code_Value: '' });
-                        that.setState({ Start_Scanner: true });
+                        that.setState({QR_Code_Value: ''});
+                        that.setState({Start_Scanner: true});
                     } else {
                         alert("CAMERA permission denied");
                     }
@@ -91,13 +86,13 @@ export default class App extends Component<Props> {
                     console.warn(err);
                 }
             }
+
             requestCameraPermission();
         } else {
-            that.setState({ QR_Code_Value: '' });
-            that.setState({ Start_Scanner: true });
+            that.setState({QR_Code_Value: ''});
+            that.setState({Start_Scanner: true});
         }
     };
-
 
 
 
@@ -107,7 +102,7 @@ export default class App extends Component<Props> {
             return (
                 <View style={styles.MainContainer}>
 
-                    <Text style={{ fontSize: 22, textAlign: 'center' }}>React Native Scan QR Code Example</Text>
+                    <Text style={{fontSize: 22, textAlign: 'center'}}>React Native Scan QR Code Example</Text>
 
                     <Text style={styles.QR_text}>
                         {this.state.QR_Code_Value ? 'Scanned QR Code: ' + this.state.QR_Code_Value : ''}
@@ -117,14 +112,14 @@ export default class App extends Component<Props> {
                         <TouchableOpacity
                             onPress={this.openLink_in_browser}
                             style={styles.button}>
-                            <Text style={{ color: '#FFF', fontSize: 14 }}>Open Link in default Browser</Text>
+                            <Text style={{color: '#FFF', fontSize: 14}}>Open Link in default Browser</Text>
                         </TouchableOpacity> : null
                     }
 
                     <TouchableOpacity
                         onPress={this.open_QR_Code_Scanner}
                         style={styles.button}>
-                        <Text style={{ color: '#FFF', fontSize: 14 }}>
+                        <Text style={{color: '#FFF', fontSize: 14}}>
                             Open QR Scanner
                         </Text>
                     </TouchableOpacity>
@@ -133,14 +128,28 @@ export default class App extends Component<Props> {
             );
         }
         return (
-            <View style={{ flex: 1 }}>
+            <View style={{flex: 1}}>
 
                 <CameraKitCameraScreen
                     showFrame={true}
+                    cameraOptions={{
+                        flashMode: 'on',             // on/off/auto(default)
+                        focusMode: 'on',               // off/on(default)
+                        zoomMode: 'on',                // off/on(default)
+                        ratioOverlay:'1:1',            // optional, ratio overlay on the camera and crop the image seamlessly
+                        ratioOverlayColor: '#00000077' // optional
+                    }}
+
+
+
                     scanBarcode={true}
                     laserColor={'#FF3D00'}
                     frameColor={'#00C853'}
                     colorForScannerFrame={'black'}
+                    allowCaptureRetake={true}
+                    hideControls={false}
+                    captureButtonImage={true}
+
                     onReadCode={event =>
                         this.onQR_Code_Scan_Done(event.nativeEvent.codeStringValue)
                     }
