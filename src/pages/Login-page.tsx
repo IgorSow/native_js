@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 // @ts-ignore
-import {Button, ImageBackground, StyleSheet, View} from 'react-native';
+import {Button, ImageBackground, StyleSheet, Text, View} from 'react-native';
 import InputTitle from "../components/Input-title";
+import UserRepository from "../services/repository/UserRepository.ts"
 
 type Props = {};
 export default class LoginP extends Component<Props, any> {
@@ -25,8 +26,7 @@ export default class LoginP extends Component<Props, any> {
                 <View style={styles.ab}>
                     <View style={styles.wrapper}>
                         <View style={styles.wrapperInput}>
-                            {/*<View style={styles.logo}><Text>Logo</Text></View>*/}
-
+                            <View style={styles.logo}><Text>Every Day Meals</Text></View>
                             <View style={styles.email}><InputTitle onChange={value => this.email = value}
                                                                    title={'email'}/></View>
                             <View style={styles.password}><InputTitle onChange={value => this.password = value}
@@ -39,8 +39,41 @@ export default class LoginP extends Component<Props, any> {
         )
     }
 
+
     collect = () => {
-        alert('email: ' + this.email + 'pass: ' + this.password)
+
+        //
+        // fetch('http://51.38.128.202:100/app/login', {
+        //     method: 'POST',
+        //     headers: {
+        //         Accept: 'application/json',
+        //         'Content-Type': 'application/json',
+        //     },
+        //     body: JSON.stringify({
+        //         nick: 'igor',
+        //         password: 'pass',
+        //     }),
+        // }).then((response) => response.json())
+        //     .then((responseJson) => {
+        //         alert(JSON.stringify(responseJson))
+        //
+        //     })
+        //     .catch((error) => {
+        //         console.error(error);
+        //     });
+
+        UserRepository.post(this.email, this.password);
+
+
+
+        // let request: Request = new Request("http://51.38.128.202:100/app/schedule", {method: 'get'});
+        //
+        // let promise = fetch(request)
+        //     .then(response => response.json())
+        //     .then(data => {alert(JSON.stringify(data))}).catch(e =>alert(e));
+
+
+        // alert('email: ' + this.email + 'pass: ' + this.password)
     }
 }
 const styles = StyleSheet.create({
@@ -55,7 +88,10 @@ const styles = StyleSheet.create({
 
     },
     logo: {
-        height: 50,
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: 200,
+        width: 200,
         backgroundColor: "white"
 
     },
@@ -64,9 +100,10 @@ const styles = StyleSheet.create({
         height: '100%',
         flexDirection: 'row',
     },
+
     wrapperInput: {
         width: '100%',
-        height: 300,
+        height: 550,
         paddingLeft: 30,
         paddingRight: 30,
         alignSelf: 'center',
