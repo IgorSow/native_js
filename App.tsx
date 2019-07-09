@@ -6,12 +6,15 @@
  * @flow
  */
 
-import Service from "./service/Service.js";
+import Service from "./src/services/Service.js";
 import React, {Component} from 'react';
+// @ts-ignore
 import {Linking, PermissionsAndroid, Platform, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 // @ts-ignore
 import {CameraKitCameraScreen} from 'react-native-camera-kit';
+import LoginP from "./src/pages/Login-page";
 
+// @ts-ignore
 const instructions = Platform.select({
     ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
     android:
@@ -34,15 +37,14 @@ export default class App extends Component<Props,any> {
         };
     }
 
-    // render() {
-    //     return (
-    //         <View style={styles2.container}>
-    //             <Text style={styles2.welcome}>Welcome to act Native!</Text>
-    //             <Text style={styles2.instructions}>To get sta, edit App.js</Text>
-    //             <Text style={styles2.instructions}>{instructions}</Text>
-    //         </View>
-    //     );
-    // }
+    render() {
+        return (
+            <View>
+                <LoginP/>
+            </View>
+        );
+    }
+
 
 
     openLink_in_browser = () => {
@@ -66,7 +68,9 @@ export default class App extends Component<Props,any> {
             // noinspection JSAnnotator
               let requestCameraPermission = async ()=> {
                 try {
+
                     const granted = await PermissionsAndroid.request(
+                        // @ts-ignore
                         PermissionsAndroid.PERMISSIONS.CAMERA, {
                             'title': 'Camera App Permission',
                             'message': 'Camera App needs access to your camera '
@@ -80,6 +84,7 @@ export default class App extends Component<Props,any> {
                         alert("CAMERA permission denied");
                     }
                 } catch (err) {
+                    // @ts-ignore
                     alert("Camera permission err", err);
                     console.warn(err);
                 }
@@ -93,67 +98,67 @@ export default class App extends Component<Props,any> {
     };
 
 
-    render() {
-        if (!this.state.Start_Scanner) {
-
-            return (
-                <View style={styles.MainContainer}>
-
-                    <Text style={{fontSize: 22, textAlign: 'center'}}>React Native Scan QR Code Example</Text>
-
-                    <Text style={styles.QR_text}>
-                        {this.state.QR_Code_Value ? 'Scanned QR Code: ' + this.state.QR_Code_Value : ''}
-                    </Text>
-
-                    {this.state.QR_Code_Value.includes("http") ?
-                        <TouchableOpacity
-                            onPress={this.openLink_in_browser}
-                            style={styles.button}>
-                            <Text style={{color: '#FFF', fontSize: 14}}>Open Link in default Browser</Text>
-                        </TouchableOpacity> : null
-                    }
-
-                    <TouchableOpacity
-                        onPress={this.open_QR_Code_Scanner}
-                        style={styles.button}>
-                        <Text style={{color: '#FFF', fontSize: 14}}>
-                            Open QR Scanner
-                        </Text>
-                    </TouchableOpacity>
-
-                </View>
-            );
-        }
-        return (
-            <View style={{flex: 1}}>
-
-                <CameraKitCameraScreen
-                    showFrame={true}
-                    cameraOptions={{
-                        flashMode: 'on',             // on/off/auto(default)
-                        focusMode: 'on',               // off/on(default)
-                        zoomMode: 'on',                // off/on(default)
-                        ratioOverlay: '1:1',            // optional, ratio overlay on the camera and crop the image seamlessly
-                        ratioOverlayColor: '#00000077' // optional
-                    }}
-
-
-                    scanBarcode={true}
-                    laserColor={'#FF3D00'}
-                    frameColor={'#00C853'}
-                    colorForScannerFrame={'black'}
-                    allowCaptureRetake={true}
-                    hideControls={false}
-                    captureButtonImage={true}
-
-                    onReadCode={event =>
-                        this.onQR_Code_Scan_Done(event.nativeEvent.codeStringValue)
-                    }
-                />
-
-            </View>
-        );
-    }
+    // render() {
+    //     if (!this.state.Start_Scanner) {
+    //
+    //         return (
+    //             <View style={styles.MainContainer}>
+    //
+    //                 <Text style={{fontSize: 22, textAlign: 'center'}}>React Native Scan QR Code Example</Text>
+    //
+    //                 <Text style={styles.QR_text}>
+    //                     {this.state.QR_Code_Value ? 'Scanned QR Code: ' + this.state.QR_Code_Value : ''}
+    //                 </Text>
+    //
+    //                 {this.state.QR_Code_Value.includes("http") ?
+    //                     <TouchableOpacity
+    //                         onPress={this.openLink_in_browser}
+    //                         style={styles.button}>
+    //                         <Text style={{color: '#FFF', fontSize: 14}}>Open Link in default Browser</Text>
+    //                     </TouchableOpacity> : null
+    //                 }
+    //
+    //                 <TouchableOpacity
+    //                     onPress={this.open_QR_Code_Scanner}
+    //                     style={styles.button}>
+    //                     <Text style={{color: '#FFF', fontSize: 14}}>
+    //                         Open QR Scanner
+    //                     </Text>
+    //                 </TouchableOpacity>
+    //
+    //             </View>
+    //         );
+    //     }
+    //     return (
+    //         <View style={{flex: 1}}>
+    //
+    //             <CameraKitCameraScreen
+    //                 showFrame={true}
+    //                 cameraOptions={{
+    //                     flashMode: 'on',             // on/off/auto(default)
+    //                     focusMode: 'on',               // off/on(default)
+    //                     zoomMode: 'on',                // off/on(default)
+    //                     ratioOverlay: '1:1',            // optional, ratio overlay on the camera and crop the image seamlessly
+    //                     ratioOverlayColor: '#00000077' // optional
+    //                 }}
+    //
+    //
+    //                 scanBarcode={true}
+    //                 laserColor={'#FF3D00'}
+    //                 frameColor={'#00C853'}
+    //                 colorForScannerFrame={'black'}
+    //                 allowCaptureRetake={true}
+    //                 hideControls={false}
+    //                 captureButtonImage={true}
+    //                 // @ts-ignore
+    //                 onReadCode={event =>
+    //                     this.onQR_Code_Scan_Done(event.nativeEvent.codeStringValue)
+    //                 }
+    //             />
+    //
+    //         </View>
+    //     );
+    // }
 
 
 }
@@ -181,6 +186,7 @@ const styles = StyleSheet.create({
     },
 });
 
+// @ts-ignore
 const styles2 = StyleSheet.create({
     container: {
         flex: 1,
