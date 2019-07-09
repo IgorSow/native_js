@@ -43,7 +43,7 @@ export default class LoginP extends Component<Props, any> {
 
     collect = async () => {
 
-        let userPromise = await UserRepository.post(this.email, this.password);
+        let userPromise = await UserRepository.login(this.email, this.password);
 
         alert(userPromise.email)
     }
