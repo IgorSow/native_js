@@ -9,6 +9,7 @@
 import Service from "./service/Service.js";
 import React, {Component} from 'react';
 import {Linking, PermissionsAndroid, Platform, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+// @ts-ignore
 import {CameraKitCameraScreen} from 'react-native-camera-kit';
 
 const instructions = Platform.select({
@@ -19,10 +20,10 @@ const instructions = Platform.select({
 });
 
 type Props = {};
-export default class App extends Component<Props> {
-    constructor() {
+export default class App extends Component<Props,any> {
+    constructor(props: Props) {
 
-        super();
+        super(props);
 
         this.state = {
 
@@ -50,7 +51,7 @@ export default class App extends Component<Props> {
 
     };
 
-    onQR_Code_Scan_Done = (QR_Code) => {
+    onQR_Code_Scan_Done = (QR_Code: String) => {
 
         this.setState({QR_Code_Value: QR_Code});
 
@@ -61,12 +62,9 @@ export default class App extends Component<Props> {
         Service.ok();
         Service.ok();
 
-
-        var that = this;
-
         if (Platform.OS === 'android') {
             // noinspection JSAnnotator
-            async function requestCameraPermission() {
+              let requestCameraPermission = async ()=> {
                 try {
                     const granted = await PermissionsAndroid.request(
                         PermissionsAndroid.PERMISSIONS.CAMERA, {
@@ -76,8 +74,8 @@ export default class App extends Component<Props> {
                     );
                     if (granted === PermissionsAndroid.RESULTS.GRANTED) {
 
-                        that.setState({QR_Code_Value: ''});
-                        that.setState({Start_Scanner: true});
+                        this.setState({QR_Code_Value: ''});
+                        this.setState({Start_Scanner: true});
                     } else {
                         alert("CAMERA permission denied");
                     }
@@ -89,11 +87,10 @@ export default class App extends Component<Props> {
 
             requestCameraPermission();
         } else {
-            that.setState({QR_Code_Value: ''});
-            that.setState({Start_Scanner: true});
+            this.setState({QR_Code_Value: ''});
+            this.setState({Start_Scanner: true});
         }
     };
-
 
 
     render() {
@@ -136,10 +133,9 @@ export default class App extends Component<Props> {
                         flashMode: 'on',             // on/off/auto(default)
                         focusMode: 'on',               // off/on(default)
                         zoomMode: 'on',                // off/on(default)
-                        ratioOverlay:'1:1',            // optional, ratio overlay on the camera and crop the image seamlessly
+                        ratioOverlay: '1:1',            // optional, ratio overlay on the camera and crop the image seamlessly
                         ratioOverlayColor: '#00000077' // optional
                     }}
-
 
 
                     scanBarcode={true}
