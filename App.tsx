@@ -6,10 +6,10 @@
  * @flow
  */
 
-import Service from './service/Service.js'
+import Service from "./service/Service.js";
 import React, {Component} from 'react';
 import {Linking, PermissionsAndroid, Platform, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {CameraKitCameraScreen,CameraKitGalleryView} from 'react-native-camera-kit';
+import {CameraKitCameraScreen} from 'react-native-camera-kit';
 
 const instructions = Platform.select({
     ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
