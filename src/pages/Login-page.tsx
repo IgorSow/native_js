@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 // @ts-ignore
 import {Button, ImageBackground, StyleSheet, Text, View} from 'react-native';
 import InputTitle from "../components/Input-title";
+// @ts-ignore
 import UserRepository from "../services/repository/UserRepository.ts"
 
 type Props = {};
@@ -40,40 +41,11 @@ export default class LoginP extends Component<Props, any> {
     }
 
 
-    collect = () => {
+    collect = async () => {
 
-        //
-        // fetch('http://51.38.128.202:100/app/login', {
-        //     method: 'POST',
-        //     headers: {
-        //         Accept: 'application/json',
-        //         'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify({
-        //         nick: 'igor',
-        //         password: 'pass',
-        //     }),
-        // }).then((response) => response.json())
-        //     .then((responseJson) => {
-        //         alert(JSON.stringify(responseJson))
-        //
-        //     })
-        //     .catch((error) => {
-        //         console.error(error);
-        //     });
+        let userPromise = await UserRepository.post(this.email, this.password);
 
-        UserRepository.post(this.email, this.password);
-
-
-
-        // let request: Request = new Request("http://51.38.128.202:100/app/schedule", {method: 'get'});
-        //
-        // let promise = fetch(request)
-        //     .then(response => response.json())
-        //     .then(data => {alert(JSON.stringify(data))}).catch(e =>alert(e));
-
-
-        // alert('email: ' + this.email + 'pass: ' + this.password)
+        alert(userPromise.email)
     }
 }
 const styles = StyleSheet.create({
