@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 // @ts-ignore
 import {ImageBackground, StyleSheet, Text, View} from 'react-native';
+import FontService from "../services/FontService"
 
 type Props = { title: String, info: String, onChange: (value: String) => void };
 export default class BoxIcon extends Component<Props, any> {
@@ -17,10 +18,10 @@ export default class BoxIcon extends Component<Props, any> {
             <View style={styles.wrapper}>
                 <View style={styles.left}>
                     <View style={styles.title}>
-                        <Text style={{fontSize: 20}}>{(this.toCapitalise(this.props.title))}</Text>
+                        <Text style={{fontSize: 20}}>{(FontService.toCapitalise(this.props.title))}</Text>
                     </View>
                     <View style={styles.info}>
-                        <Text style={{fontSize: 12}}>{(this.toCapitalise(this.props.info))}</Text>
+                        <Text style={{fontSize: 12}}>{(FontService.toCapitalise(this.props.info))}</Text>
                     </View>
                 </View>
                 <View style={styles.right}>
@@ -44,17 +45,6 @@ export default class BoxIcon extends Component<Props, any> {
     onChange = (value: String) => {
         this.props.onChange(value)
     }
-    toCapitalise(value: String){
-        value = value.toLowerCase();
-        let result;
-
-        result = value.charAt(0).toUpperCase();
-
-        result += value.slice(1);
-
-        return result;
-    }
-
 }
 
 const styles = StyleSheet.create({

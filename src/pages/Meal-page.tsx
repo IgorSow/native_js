@@ -25,7 +25,7 @@ export default class MealPage extends Component<Props, State> {
     }
 
     async init() {
-        let meal = await MealRepository.getById(2);
+        let meal = await MealRepository.getById(10);
         this.setState({meal: meal})
     }
 
