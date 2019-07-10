@@ -10,7 +10,7 @@ class MealDto {
     isPublic: boolean;
     createdDate: Date;
     receiptDTO: ReceiptDTO;
-    typeMeal: Set<TypeMealDTO>;
+    typeMeal: TypeMealDTO[];
     creatorMeal: UserDto;
     products: ProductUnitDTO[];
 }

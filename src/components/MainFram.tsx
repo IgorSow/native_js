@@ -38,10 +38,9 @@ const styles = StyleSheet.create({
     },
     wrapper: {
         flex: 1,
-        margin: 30,
+        margin: 15,
         height: '100%',
         backgroundColor: 'rgba(255, 255, 255, 0.87)',
-        flexDirection: 'row',
         borderRadius: 10,
     },
 });
