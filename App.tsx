@@ -5,13 +5,14 @@
  * @format
  * @flow
  */
-
+// @ts-ignore
 import Service from "./src/services/Service.js";
 import React, {Component} from 'react';
 // @ts-ignore
 import {Linking, PermissionsAndroid, Platform, StyleSheet, View, Text} from 'react-native';
 // @ts-ignore
 import {CameraKitCameraScreen} from 'react-native-camera-kit';
+// @ts-ignore
 import LoginP from "./src/pages/Login-page";
 import MealPage from "./src/pages/Meal-page";
 
@@ -163,7 +164,7 @@ export default class App extends Component<Props, any> {
 
 
 }
-
+// @ts-ignore
 const styles = StyleSheet.create({
 
     MainContainer: {

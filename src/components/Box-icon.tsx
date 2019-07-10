@@ -18,11 +18,9 @@ export default class BoxIcon extends Component<Props, any> {
                 <View style={styles.left}>
                     <View style={styles.title}>
                         <Text style={{fontSize: 20}}>{(this.toCapitalise(this.props.title))}</Text>
-                        {/*<Text >TITLE</Text>*/}
                     </View>
                     <View style={styles.info}>
                         <Text style={{fontSize: 12}}>{(this.toCapitalise(this.props.info))}</Text>
-                        {/*<Text >INFOR</Text>*/}
                     </View>
                 </View>
                 <View style={styles.right}>

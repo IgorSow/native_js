@@ -7,6 +7,7 @@ import {MealDto} from "../services/objects/MealDto";
 import MealRepository from "../services/repository/MealRepository.ts"
 import MainFram from "../components/MainFram";
 import BoxIcon from "../components/Box-icon";
+import FullMeal from "../components/Full-meal";
 
 type Props = {};
 type State = { meal: MealDto };
@@ -46,12 +47,9 @@ export default class MealPage extends Component<Props, State> {
                                      }}/>
                         </View>
 
-                        <View style={styles.box_icon}>
-                            <BoxIcon title={(this.state.meal.typeMeal[0].mealTime)} info={(this.state.meal.title)}
-                                     onChange={() => {
-                                     }}/>
+                        <View style={styles.full_meal}>
+                            <FullMeal meal={this.state.meal}/>
                         </View>
-
 
 
                     </MainFram>
@@ -83,6 +81,7 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
         position: 'absolute',
+        borderBottomLeftRadius: 10,
     },
 
     logo: {
@@ -96,6 +95,11 @@ const styles = StyleSheet.create({
 
     box_icon: {
         height: 80,
+        margin: 10,
+    },
+
+    full_meal: {
+        flex: 1,
         margin: 10,
     },
 
