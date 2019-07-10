@@ -1,4 +1,4 @@
-class User {
+class UserDto {
     email: string;
     favouritesMealsSetId: number[];
     idUser: number;

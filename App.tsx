@@ -9,10 +9,11 @@
 import Service from "./src/services/Service.js";
 import React, {Component} from 'react';
 // @ts-ignore
-import {Linking, PermissionsAndroid, Platform, StyleSheet, View} from 'react-native';
+import {Linking, PermissionsAndroid, Platform, StyleSheet, View, Text} from 'react-native';
 // @ts-ignore
 import {CameraKitCameraScreen} from 'react-native-camera-kit';
 import LoginP from "./src/pages/Login-page";
+import MealPage from "./src/pages/Meal-page";
 
 // @ts-ignore
 const instructions = Platform.select({
@@ -40,7 +41,8 @@ export default class App extends Component<Props, any> {
     render() {
         return (
             <View style={{flex: 1}}>
-                <LoginP/>
+                {/*<LoginP/>*/}
+                <MealPage/>
             </View>
         );
     }

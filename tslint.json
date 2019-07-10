@@ -1,24 +1,17 @@
 {
-  "defaultSeverity": "error",
-  "extends": [
-    "tslint-config-airbnb",
-    "tslint-react"
-  ],
-  "jsRules": {},
+  "extends": "../tslint.json",
   "rules": {
-    "import-name": [false],
-    "variable-name": [
+    "directive-selector": [
       true,
-      "ban-keywords",
-      "check-format",
-      "allow-pascal-case"
+      "attribute",
+      "app",
+      "camelCase"
     ],
-    "quotemark": [
+    "component-selector": [
       true,
-      "single",
-      "avoid-escape",
-      "avoid-template"
+      "element",
+      "app",
+      "kebab-case"
     ]
-  },
-  "rulesDirectory": []
+  }
 }

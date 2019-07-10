@@ -1,23 +1,21 @@
-class UserRepository {
+import {MealDto} from "../objects/MealDto";
+
+    class MealRepository {
 
     http: String = "http://51.38.128.202:100/app/login";
 
-    async login(login: String, pass: String): Promise<UserDto> {
+    async getById(id: number): Promise<MealDto> {
         // @ts-ignore
-        let user: UserDto =
-            await fetch('http://51.38.128.202:100/app/login', {
-                method: 'POST',
+        let user: MealDto =
+            await fetch('http://51.38.128.202:100/app/meals/short/' + id, {
+                method: 'GET',
                 headers: {
                     Accept: 'application/json',
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({
-                    nick: login,
-                    password: pass,
-                }),
             })
                 .then((response) => response.json())
-                .then((responseJson: UserDto) => {
+                .then((responseJson: MealDto) => {
                     return responseJson;
                 })
                 .catch((error) => {
@@ -29,6 +27,6 @@ class UserRepository {
     }
 }
 
-let repository = new UserRepository();
+let repository = new MealRepository();
 
 export default repository;
