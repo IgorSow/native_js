@@ -12,7 +12,7 @@ class MealDto {
     receiptDTO: ReceiptDTO;
     typeMeal: Set<TypeMealDTO>;
     creatorMeal: UserDto;
-    products: Set<ProductUnitDTO>;
+    products: ProductUnitDTO[];
 }
 // @ts-ignore
 enum Language {

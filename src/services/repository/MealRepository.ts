@@ -6,8 +6,8 @@ import {MealDto} from "../objects/MealDto";
 
     async getById(id: number): Promise<MealDto> {
         // @ts-ignore
-        let user: MealDto =
-            await fetch('http://51.38.128.202:100/app/meals/short/' + id, {
+        let meal: MealDto =
+            await fetch('http://51.38.128.202:100/app/meals/' + id, {
                 method: 'GET',
                 headers: {
                     Accept: 'application/json',
@@ -15,15 +15,15 @@ import {MealDto} from "../objects/MealDto";
                 },
             })
                 .then((response) => response.json())
-                .then((responseJson: MealDto) => {
-                    return responseJson;
+                .then((responseJson: Array<MealDto>) => {
+                    return responseJson.pop();
                 })
                 .catch((error) => {
                     alert('Invalid user or password');
                     console.log(error)
                 });
 
-        return user;
+        return meal;
     }
 }
 
